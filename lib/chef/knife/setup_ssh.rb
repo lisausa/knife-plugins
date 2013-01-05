@@ -1,5 +1,6 @@
 require_relative '../../core_ext'
 require 'chef/knife'
+require 'pry'
 
 class LisausaKnifePlugins::SetupSsh < ::Chef::Knife
   banner 'knife setup ssh'
@@ -17,9 +18,14 @@ class LisausaKnifePlugins::SetupSsh < ::Chef::Knife
       name = n.name
       name << '.lisausa.net' unless /\.lisausa.net\Z/.match(n.name)
 
+      begin
+        hostname = n.ipaddress
+      rescue
+        hostname = nil
+      end
       config << <<-END.strip_heredoc
         Host #{name}
-          HostName #{n[:cloud][:public_hostname]}
+          HostName #{hostname}
       END
     end
 
