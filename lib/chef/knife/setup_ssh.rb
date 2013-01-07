@@ -1,6 +1,5 @@
 require_relative '../../core_ext'
 require 'chef/knife'
-require 'pry'
 
 class LisausaKnifePlugins::SetupSsh < ::Chef::Knife
   banner 'knife setup ssh'
