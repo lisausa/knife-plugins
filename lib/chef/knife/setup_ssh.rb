@@ -44,7 +44,8 @@ class LisausaKnifePlugins::SetupSsh < ::Chef::Knife
       ssh_config.push [
         "Host *.lisausa.net",
         "  IdentitiesOnly yes",
-        "  PasswordAuthentication no"
+        "  PasswordAuthentication no",
+        "  ForwardAgent yes"
       ]
       ssh_config.push "  IdentityFile #{c[:identity_file]}" if c[:identity_file]
       ssh_config.push "  User #{c[:ssh_user]}" if c[:ssh_user]
