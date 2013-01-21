@@ -59,7 +59,11 @@ class LisausaKnifePlugins::SetupSsh < ::Chef::Knife
       FileUtils.copy_file(file_path, "#{file_path}~")
       File.open(file_path, File::RDWR|File::CREAT) do |f|
         f.flock(File::LOCK_EX)
+
         contents = f.read.gsub(/### BEGIN KNIFE BLOCK ###.+?(### END KNIFE BLOCK ###|\Z)/m, ssh_config)
+        unless contents.include?('### BEGIN KNIFE BLOCK ###')
+          contents << ssh_config
+        end
         f.rewind
         f.truncate(0)
         f.write contents
