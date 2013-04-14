@@ -1,4 +1,4 @@
-require_relative '../../lisa_knife_plugins'
+require_relative '../../lisausa_knife_plugins'
 require_relative '../../core_ext'
 require 'chef/knife'
 
